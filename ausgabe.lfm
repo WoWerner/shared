@@ -6,9 +6,9 @@ object frmAusgabe: TfrmAusgabe
   Caption = 'Ausgabe'
   ClientHeight = 600
   ClientWidth = 800
-  OnShow = FormShow
-  LCLVersion = '3.0.0.3'
+  LCLVersion = '4.4.0.0'
   WindowState = wsMaximized
+  OnShow = FormShow
   object Panel1: TPanel
     Left = 0
     Height = 42
@@ -534,6 +534,10 @@ object frmAusgabe: TfrmAusgabe
       object SynGutterMarks1: TSynGutterMarks
         Width = 24
         MouseActions = <>
+        MaxExtraMarksColums = 0
+        Options = [sgmoDeDuplicateMarksOnOverflow]
+        MarkupInfo.Background = clBtnFace
+        MarkupInfo.Foreground = clNone
       end
       object SynGutterLineNumber1: TSynGutterLineNumber
         Width = 17
@@ -550,6 +554,9 @@ object frmAusgabe: TfrmAusgabe
         MouseActions = <>
         ModifiedColor = 59900
         SavedColor = clGreen
+        MarkupInfo.Background = clNone
+        MarkupInfo.Foreground = clGreen
+        MarkupInfo.FrameColor = 59900
       end
       object SynGutterSeparator1: TSynGutterSeparator
         Width = 2

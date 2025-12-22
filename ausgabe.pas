@@ -14,7 +14,7 @@ uses
   Dialogs,
   ExtCtrls,
   StdCtrls,
-  Menus,
+  Menus, Buttons,
   PrintersDlgs,
   SynMemo;
 

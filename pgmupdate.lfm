@@ -1,16 +1,16 @@
 object frmPgmUpdate: TfrmPgmUpdate
-  Left = 217
+  Left = 158
   Height = 487
-  Top = 167
+  Top = 113
   Width = 948
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Programmupdate'
   ClientHeight = 487
   ClientWidth = 948
-  OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '2.2.0.4'
+  LCLVersion = '4.2.0.0'
+  OnShow = FormShow
   object edtUrl: TEdit
     Left = 72
     Height = 23

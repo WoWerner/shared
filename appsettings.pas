@@ -40,6 +40,10 @@ begin
   MyDirectory := ExtractFilePath(SysToUTF8(Application.EXEName));
   ConfigFile  := MyDirectory + ChangeFileExt(ExtractFileName(Application.EXEName), '.ini');
 {$endif}
+{$ifdef win64}
+  MyDirectory := ExtractFilePath(SysToUTF8(Application.EXEName));
+  ConfigFile  := MyDirectory + ChangeFileExt(ExtractFileName(Application.EXEName), '.ini');
+{$endif}
 {$ifdef Unix}
   ConfigFile := GetAppConfigFile(False) + '.conf';
 {$endif}
