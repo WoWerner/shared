@@ -32,8 +32,10 @@ type
 
 //IniFile
 function  ReadIniVal(FileName, Section, Keyword, DefVal: string; StoreDef : boolean): string;
+function  ReadIniBool(FileName, Section, Keyword: string; DefVal, StoreDef : boolean): boolean;
 function  ReadIniInt(FileName, Section, Keyword:String; DefVal: integer): integer;
 procedure WriteIniVal(FileName, Section, Keyword, Val: string);
+procedure WriteIniBool(FileName, Section, Keyword: string; b: boolean);
 procedure WriteIniInt(FileName, Section, Keyword: string; Val: integer);
 
 //Passwort
@@ -70,6 +72,7 @@ function  RealToStr(D:Double;Stellen,Komma:Integer):String;
 function  IntToCurrency(i: Longint): string;
 function  CurrencyToInt(s: string; bEuroM: boolean): Longint;
 Function  ZahlInString(n:Longint):String;
+Function  BoolInString(b:boolean):String;
 
 //Datum
 function AgeNow(const DateOfBird: TDateTime): Integer;
@@ -696,6 +699,13 @@ begin
         Result[1] := Uppercase(Result[1])[1];
       end;
 end; {Basis Georg W. Seefried}
+
+Function  BoolInString(b:boolean):String;
+begin
+  if b
+    then result := 'TRUE'
+    else result := 'FALSE';
+end;
 
 {******************************************************************************}
 
@@ -1444,6 +1454,31 @@ begin
   slText.Free;
 end;
 
+function  ReadIniBool(FileName, Section, Keyword: string; DefVal, StoreDef : boolean): boolean;
+
+//Versucht einen Wert zu lesen.
+//Wenn er nicht da ist, wird er mit dem DefVal angelegt
+
+Var
+ INI   : TINIFile;
+ sHelp : String;
+
+begin
+  INI := TINIFile.Create(UTF8ToSys(FileName));
+  sHelp := INI.ReadString(Section, Keyword, '');
+  if sHelp = ''
+    then
+      begin
+        if StoreDef then INI.WriteString(Section, Keyword, BoolInString(DefVal));
+        Result := DefVal;
+      end
+    else
+      begin
+        Result := ('TRUE' = Uppercase(trim(sHelp)));
+      end;
+  INI.Free;
+end;
+
 {==============================================================================}
 
 function  ReadINIInt(FileName, Section, Keyword: String; DefVal: integer): integer;
@@ -1489,6 +1524,17 @@ begin
 end;
 
 {==============================================================================}
+
+procedure WriteIniBool(FileName, Section, Keyword: string; b: boolean);
+
+Var
+ INI: TINIFile;
+
+begin
+  INI := TINIFile.Create(UTF8ToSys(FileName));
+  INI.WriteString(Section, Keyword, BoolInString(b));
+  INI.Free;
+end;
 
 procedure WriteIniInt(FileName, Section, Keyword: string; Val: integer);
 
