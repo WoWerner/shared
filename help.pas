@@ -1319,7 +1319,7 @@ var s: string;
 
 begin
   Str(D:Stellen:Komma,S);
-  RealToStr := S
+  RealToStr := S;
 end;
 
 {******************************************************************************}
